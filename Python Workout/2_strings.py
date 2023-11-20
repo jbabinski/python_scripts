@@ -1,5 +1,6 @@
 # Ex 5 pig latin
 from string import punctuation
+import string
 
 def pig_latin(word):
     word_capitalized = word[0].isupper()
@@ -107,7 +108,36 @@ def remove_names(article, names=[]):
     return ' '.join(article_redacted)
 
 
+def url_converter(url):
+    new_url = []
+
+    for char in url:
+        if char in string.ascii_letters or char.isnumeric():
+            new_url.append(char)
+        else:
+            new_url.append(f"%{hex(ord(char)).split('x')[1]}")
+    return ''.join(new_url)
 
 
+# unicode + UTF-8 https://nedbatchelder.com/text/unipain.html
+# https://docs.python.org/3/howto/sorting.html#sortinghowto
+# Ex 8
+def strsort(text):
+    return ''.join(sorted(text))
 
 
+def sort_names():
+    print(','.join(sorted('Tom Dick Harry'.split())))
+
+
+def find_last_word(filepath):
+    with open(filepath, 'r') as f:
+        return sorted(f.read().split())[-1]
+
+
+def find_longest_word(filepath):
+    with open(filepath, 'r') as f:
+        return sorted(f.read().split(), key=lambda word: len(word))[-1]
+
+
+print(find_longest_word('string_text.txt'))
