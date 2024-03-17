@@ -49,13 +49,39 @@ def count_vowels(filename):
 
     return vowel_dict
 
-#
-# dct = {'a': 1}
-#
-# print(dct.get('b',0))
-# print(dct)
-#
-#
+# EX 19
+def passwd_to_dict(filename):
+    """
+    returns a dict with usernames and users' ids. Example:
+    _launchservicesd:*:239:239::0:0:_launchservicesd:/var/empty:/usr/bin/false
+    """
+    users = {}
+    with open(filename) as f:
+        for line in f:
+            if not line.startswith(('#', '\n')):    #ignore comments/blank lines
+                user_info = line.split(':')
+                users[user_info[0]] = int(user_info[2])
+        return(users)
+
+
+# print(passwd_to_dict('5_passwd.txt'))
+import collections
+def users_shell(filename):
+    """
+    returns a dict with shells and user logins. Example:
+    _launchservicesd:*:239:239::0:0:_launchservicesd:/var/empty:/usr/bin/false
+    """
+    users_shells = collections.defaultdict(list)
+    with open(filename) as f:
+        for line in f:
+            if not line.startswith(('#', '\n')):    #ignore comments/blank lines
+                user_info = line.strip().split(':')
+                users_shells[user_info[-1]].append(user_info[0])
+        return users_shells
+
+
+
+
 
 
 
