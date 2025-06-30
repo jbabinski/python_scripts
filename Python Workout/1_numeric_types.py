@@ -1,4 +1,4 @@
-# Ex 1: guessing game
+# Ex 1: guessing game -
 import random
 
 def guessing_game(tries=3):
